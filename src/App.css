@@ -1,0 +1,21 @@
+*{
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+#screen-size {
+  width: 100%;
+  margin: auto;
+}
+
+@media (min-width: 600px) {
+  #screen-size {
+    width: 90%;
+  }
+}
+
+@media (min-width: 1024px) {
+  #screen-size {
+    width: 60%;
+  }
+}
