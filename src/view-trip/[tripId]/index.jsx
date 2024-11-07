@@ -13,6 +13,7 @@ function ViewTrip() {
   const [trip, setTrip] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showBookOption, setShowBookOption] = useState(false);
 
   useEffect(() => {
     if (tripId) {
@@ -49,10 +50,10 @@ function ViewTrip() {
       ) : (
         <div className="p-4 md:px-20 lg:px-44 xl:px-56">
           {/* Information Section */}
-          <InfoSection trip={trip} />
+          <InfoSection trip={trip} showBookOption={showBookOption} />
 
           {/* Recommended Hotels */}
-          <Hotels trip={trip} />
+          <Hotels trip={trip} showBookOption={showBookOption} setShowBookOption={setShowBookOption}/>
 
           {/* Itinerary Plans */}
           <Itinerary trip={trip} />

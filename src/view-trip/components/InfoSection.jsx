@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/constants/firebase";
 import { toast } from "sonner";
-import infinityLoader from "../../../images/infinityLoader.gif";
+import infinityLoader from "../../../images/infinityLoader.gif";import { MdOutlineCancel } from "react-icons/md";
 
-function InfoSection({ trip }) {
+function InfoSection({ trip, showBookOption }) {
   const [rateLoading, setRateLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [mood, setMood] = useState(true);
@@ -79,7 +79,7 @@ function InfoSection({ trip }) {
             <h2 className="p-1 px-3 bg-gray-200 rounded-full text-gray-700">
               🧑‍🤝‍🧑 No. of Travellers: {trip?.userSelection?.traveler}
             </h2>
-            {!rateLoading ? (
+            {!rateLoading && !showBookOption ? (
               <h2
                 className="p-1 px-3 text-white rounded-full bg-[#f56551] cursor-pointer"
                 onClick={openRatingSystem}
@@ -87,12 +87,11 @@ function InfoSection({ trip }) {
                 ✨ Rate Trip
               </h2>
             ) : (
-              <h2
-                className="p-1 px-3 w-20 text-center text-white rounded-full bg-[#000] cursor-pointer"
+              <div
+                className="p-1 px-3 w-20 text-white rounded-full bg-[#f56551] cursor-pointer"
                 onClick={openRatingSystem}
-              >
-                ❌
-              </h2>
+              ><MdOutlineCancel className="scale-150 mt-1 m-auto"/>
+              </div>
             )}
           </div>
         </div>
@@ -105,6 +104,7 @@ function InfoSection({ trip }) {
           <h1 className="text-left text-[#f56551] text-xl font-bold col-span-6">
             Send Feedback
           </h1>
+
           <textarea
             placeholder="Your feedback..."
             value={feedback}

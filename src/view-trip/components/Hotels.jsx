@@ -1,13 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import placeholder from "../../../images/placeholder.jpg";
 import { toast } from "sonner";
+import Cookies from "js-cookie";
 
-function Hotels({ trip }) {
+function Hotels({ trip, showBookOption, setShowBookOption }) {
   const { hotelOptions } = trip?.tripData || {};
-  const handlePayment = ()=>{
-    toast.success("payment done..")
-  }
+  const handlePayment = () => {
+    toast.success("payment done..");
+    setShowBookOption(!showBookOption);
+    window.open("https://ayushkumarthakur-portfolio.vercel.app", "_blank");
+  };
   return (
     <div>
       <h2 className="text-[#f56551] font-medium mt-5 mb-4 text-md sm:text-xl capitalize">
@@ -38,7 +41,12 @@ function Hotels({ trip }) {
               <p className="text-gray-800 text-sm">
                 🌟 Rating: {hotel.rating} / 5
               </p>
-              <button className="bg-[#f56551] py-1 rounded-md cursor-pointer" onClick={handlePayment}>Book Now</button>
+              {showBookOption?(<button
+                className="bg-[#f56551] py-1 rounded-md cursor-pointer"
+                onClick={handlePayment}
+              >
+                Book Now
+              </button>):(<div></div>)}
             </div>
           ))}
       </div>

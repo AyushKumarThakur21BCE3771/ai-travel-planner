@@ -51,7 +51,6 @@ const Form = () => {
         });
         const authToken = user.accessToken;
         Cookies.set("token", authToken, { expires: 7 });
-        console.log(Cookies.get("token"));
         localStorage.setItem(
           "user",
           JSON.stringify({

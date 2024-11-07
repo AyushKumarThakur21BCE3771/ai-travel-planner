@@ -39,6 +39,12 @@ const Card = () => {
       await auth.signOut();
       Cookies.remove("token");
       localStorage.removeItem("user");
+      if (localStorage.getItem("hotelPayment")) {
+        localStorage.removeItem("hotelPayment");
+      }
+      if (localStorage.getItem("rateTripOption")) {
+        localStorage.removeItem("rateTripOption");
+      }
       window.location.href = "/auth/signin";
     } catch (error) {
       console.log(error.message);
@@ -84,9 +90,6 @@ const Card = () => {
             <Link to={"/my-trips"} className="hover:text-slate-900 mb-2">
               Travel History
             </Link>
-            <Link to={"/my-trips"} className="hover:text-slate-900 mb-2">
-              Forgot Password
-            </Link>
             <div className="input-container bg-inherit w-[100%] flex flex-col items-start mb-2">
               <label className="text-slate-900">Travel Preferences</label>
               <div className="flex justify-between w-[100%]">
@@ -105,7 +108,11 @@ const Card = () => {
                     Save
                   </button>
                 ) : (
-                  <img src={infinityLoader} className="w-[35px] h-[28px]" alt="" />
+                  <img
+                    src={infinityLoader}
+                    className="w-[35px] h-[28px]"
+                    alt=""
+                  />
                 )}
               </div>
             </div>
