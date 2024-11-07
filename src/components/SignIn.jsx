@@ -5,9 +5,11 @@ import { toast } from "sonner";
 import { auth } from "@/constants/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Cookies from "js-cookie";
+import infinityLoader from "../../images/infinityLoader.gif";
 
 const Form = () => {
   const [formData, setFormData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (name, value) => {
     setFormData({
@@ -17,6 +19,7 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     if (!formData.email || !formData.password) {
       alert("Please fill all details !");
@@ -32,8 +35,9 @@ const Form = () => {
         uid: user.uid
       }));
       window.location.href = "/create-trip";
+      setLoading(true);
     } catch (error) {
-      console.log(error.message);
+      toast.error("Inavalid Credentials !")
     }
   };
 
@@ -92,9 +96,11 @@ const Form = () => {
               </svg>
             </span>
           </div>
-          <button className="submit" type="submit" onClick={handleSubmit}>
-            Sign in
-          </button>
+          {!loading ? (<button className="submit" type="submit" onClick={handleSubmit}>
+            Sign In
+          </button>):(
+            <img src={infinityLoader} className="scale-75 m-auto" alt="" />
+          )}
           <p className="signup-link">
             No account?&nbsp;&nbsp;
             <Link to={"/auth/signup"}>Sign Up</Link>

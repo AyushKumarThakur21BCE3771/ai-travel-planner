@@ -6,9 +6,11 @@ import { toast } from "sonner";
 import { auth, db } from "../constants/firebase.js";
 import { setDoc, doc } from "firebase/firestore";
 import Cookies from "js-cookie";
+import infinityLoader from "../../images/infinityLoader.gif";
 
 const Form = () => {
   const [formData, setFormData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (name, value) => {
     setFormData({
@@ -18,6 +20,7 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     if (
       !formData.name ||
@@ -57,8 +60,9 @@ const Form = () => {
         );
       }
       window.location.href = "/create-trip";
+      setLoading(false);
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -154,9 +158,11 @@ const Form = () => {
               </svg>
             </span>
           </div>
-          <button className="submit" type="submit" onClick={handleSubmit}>
-            Sign in
-          </button>
+          {!loading ? (<button className="submit" type="submit" onClick={handleSubmit}>
+            Sign Up
+          </button>):(
+            <img src={infinityLoader} className="scale-75 m-auto" alt="" />
+          )}
           <p className="signup-link">
             Already a Member?&nbsp;&nbsp;
             <Link to={"/auth/signin"}>Sign In</Link>
