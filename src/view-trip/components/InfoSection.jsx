@@ -17,7 +17,6 @@ function InfoSection({ trip }) {
     setMood(false);
   };
   const submitRating = async () => {
-    console.log("here");
     if (feedback == "") {
       toast.error("Please provide some preferences !");
       return;
@@ -31,6 +30,7 @@ function InfoSection({ trip }) {
         userEmail: user?.email,
       });
       toast.success("Travel Preferences Saved Successfully !");
+
     }
     setFeedback("");
   };
@@ -84,6 +84,7 @@ function InfoSection({ trip }) {
           </h1>
           <textarea
             placeholder="Your feedback..."
+            value={feedback}
             className="bg-slate-100 text-slate-600 h-28 placeholder:text-slate-600 placeholder:opacity-50 border border-slate-200 col-span-6 resize-none outline-none rounded-lg p-2 duration-300 focus:border-slate-600 focus:text-black"
             onChange={(e) => setFeedback(e.target.value)}
           ></textarea>

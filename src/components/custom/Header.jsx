@@ -14,14 +14,11 @@ const Header = () => {
     setLoading(false);
   }, []);
   return (
-    <div
-      className="fixed top-0 left-0 right-0 bg-slate-200 h-[50px] shadow-lg flex justify-between items-center px-5"
-      style={{ padding: "5px 50px" }}
-    >
+    <div className="fixed top-0 left-0 right-0 bg-slate-200 h-[50px] shadow-lg flex justify-between items-center px-5">
       <Link to={"/"}>
         <div className="font-semibold text-[#f56551] flex justify-between items-center gap-[10px]">
           <img src={logo} alt="" className="h-[45px]" />
-          <h1>TripZilla</h1>
+          <h1 className="hidden sm:inline">TripZilla</h1>
         </div>
       </Link>
       <div>

@@ -20,7 +20,6 @@ const Card = () => {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setUserDetails(docSnap.data());
-        // console.log(userDetails);
         setLoading(false);
       } else {
         console.log("user not logged in");
@@ -89,6 +88,7 @@ const Card = () => {
                 <input
                   placeholder="Ex: Peace, Nature"
                   type="text"
+                  value={travelPreferences}
                   className="bg-inherit outline-none text-xs border-2 p-1 w-[75%] rounded-md"
                   onChange={(e) => setTravelPreferences(e.target.value)}
                 />
