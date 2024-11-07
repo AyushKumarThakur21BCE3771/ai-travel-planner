@@ -15,7 +15,7 @@ function Hotels({ trip }) {
           hotelOptions.map((hotel, index) => (
             <div
               key={index}
-              className="bg-white shadow rounded-md p-4 mb-4 flex flex-col gap-2 hover:scale-105 transition-all cursor-pointer"
+              className="bg-white shadow rounded-md p-4 mb-4 flex flex-col gap-2"
             >
               <img
                 //   src={hotel.hotelImageUrl}
