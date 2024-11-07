@@ -37,6 +37,27 @@ function InfoSection({ trip }) {
     }
     setFeedback("");
   };
+  const handleShare = () => {
+    if (navigator.share) {
+      const shareData = {
+        title: `Trip to ${trip?.userSelection?.location}`,
+        text: `🌍 Destination: ${
+          trip?.userSelection?.location
+        }\n\n🗓 ${
+          trip?.userSelection?.totalDays
+        } ${trip?.userSelection?.totalDays > 1 ? "Days" : "Day"}\n💸 Budget: ${
+          trip?.userSelection?.budget
+        }\n👥 Travelers: ${trip?.userSelection?.traveler}`,
+      };
+
+      navigator
+        .share(shareData)
+        .then(() => console.log("Trip details shared successfully!"))
+        .catch((error) => console.error("Error sharing trip details:", error));
+    } else {
+      alert("Sharing is not supported on this browser.");
+    }
+  };
   return (
     <div>
       <img
@@ -77,8 +98,8 @@ function InfoSection({ trip }) {
             )}
           </div>
         </div>
-        <Button className="scale-75">
-          <IoMdShare className="scale-150" />
+        <Button className="scale-75" onClick={handleShare}>
+          <IoMdShare className="scale-150"/>
         </Button>
       </div>
       {rateLoading ? (
