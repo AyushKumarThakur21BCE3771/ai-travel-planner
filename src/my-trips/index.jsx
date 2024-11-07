@@ -49,7 +49,7 @@ function MyTrips() {
           <img src={sandTimer} alt="" className="m-auto scale-150" />
         </div>
       ) : (
-        <div className="sm:px-10 md:px:32 lg:px-56 xl:px-10 px-5 mt-20 lg:w-[60%] m-auto">
+        <div className="sm:px-1 md:px:32 lg:px-56 px-5 mt-20 w-[90%] m-auto">
           <div className="flex mb-4">
           <h2 className="text-[#f56551] font-bold mt-5 mb-4 text-md sm:text-xl capitalize">
             My Trips&nbsp;&nbsp;🗺️ 🚁 🍸

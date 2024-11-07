@@ -77,7 +77,7 @@ const CreateTrip = () => {
 
   return (
     <>
-      <div className="sm:px-10 md:px:32 lg:px-56 xl:px-10 px-5 mt-20 lg:w-[60%] m-auto">
+      <div className="px-10 sm:px-20 md:px:32 md:w-[75%] mt-20 m-auto">
         <div>
           <h1 className="font-bold text-3xl">
             Tell us your travel preferences 🏕️🌴

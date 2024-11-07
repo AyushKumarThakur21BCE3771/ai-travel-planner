@@ -4,6 +4,7 @@ import { getDoc, doc, setDoc } from "firebase/firestore";
 import logout from "../../images/logout.png";
 import Cookies from "js-cookie";
 import sandTimer from "../../images/sandTimer.gif";
+import infinityLoader from "../../images/infinityLoader.gif";
 import Footer from "./custom/Footer.jsx";
 import { Link } from "react-router-dom";
 import { Input } from "postcss";
@@ -13,6 +14,8 @@ const Card = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(false);
   const [travelPreferences, setTravelPreferences] = useState("");
+  const [saveLoading, setSaveLoading] = useState(false);
+
   const fetchUserData = async () => {
     setLoading(true);
     auth.onAuthStateChanged(async (user) => {
@@ -46,6 +49,7 @@ const Card = () => {
       toast.error("Please provide some preferences !");
       return;
     }
+    setSaveLoading(true);
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       const docId = Date.now().toString();
@@ -55,6 +59,7 @@ const Card = () => {
       });
       toast.success("Travel Preferences Saved Successfully !");
       setTravelPreferences("");
+      setSaveLoading(false);
     }
   };
 
@@ -92,12 +97,16 @@ const Card = () => {
                   className="bg-inherit outline-none text-xs border-2 p-1 w-[75%] rounded-md"
                   onChange={(e) => setTravelPreferences(e.target.value)}
                 />
-                <button
-                  className="w-12 px-2 rounded-md text-sm pb-1 bg-slate-800 text-white"
-                  onClick={handleSavePreferences}
-                >
-                  Save
-                </button>
+                {!saveLoading ? (
+                  <button
+                    className="w-12 px-2 rounded-md text-sm pb-1 bg-slate-800 text-white"
+                    onClick={handleSavePreferences}
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <img src={infinityLoader} className="w-[35px] h-[28px]" alt="" />
+                )}
               </div>
             </div>
           </div>
