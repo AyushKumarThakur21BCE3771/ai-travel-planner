@@ -54,8 +54,8 @@ const Card = () => {
         travelPreferences: travelPreferences,
         userEmail: user?.email,
       });
-      setTravelPreferences("");
       toast.success("Travel Preferences Saved Successfully !");
+      setTravelPreferences("");
     }
   };
 

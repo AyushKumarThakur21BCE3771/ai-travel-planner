@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../../images/logo.png";
 import { Button } from "../ui/button";
 import { useSonner } from "sonner";
+import userImg from "../../../images/userImg.png";
 
 const Header = () => {
   const [loading, setLoading] = useState(false);
@@ -26,6 +27,25 @@ const Header = () => {
       <div>
         {user ? (
           <div className="flex gap-5">
+            <Link to="/create-trip">
+              <div
+                className="border-2 flex flex-row"
+                style={{
+                  border: "1px solid black",
+                  padding: "0px",
+                  borderRadius: "10px",
+                  height: "30px",
+                  alignItems: "center",
+                }}
+              >
+                <Button
+                  className="bg-inherit rounded-md text-black hover:bg-slate-200"
+                  style={{ height: "20px" }}
+                >
+                  Create Trip
+                </Button>
+              </div>
+            </Link>
             <Link to="/my-trips">
               <div
                 className="border-2 flex flex-row"
@@ -48,10 +68,7 @@ const Header = () => {
 
             {!loading ? (
               <Link to={"/user/details"}>
-                <img
-                  src={`https://avatar.iran.liara.run/username?username=${user?.email}`}
-                  className="h-[30px]"
-                />
+                <img src={userImg} className="h-[30px]" />
               </Link>
             ) : (
               <div

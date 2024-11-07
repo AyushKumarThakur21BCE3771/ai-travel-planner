@@ -54,13 +54,10 @@ const CreateTrip = () => {
         .replace("{traveler}", formData?.traveler);
 
       const result = await chatSession.sendMessage(FINAL_PROMPT);
-
-      // console.log(result?.response?.text());
       saveTrip(result?.response?.text());
-      setLoading(false);
       setUserLoggedIn(true);
     } else {
-      console.log("user needs to log in first to generate trip");
+      window.location.href = "/auth/signin";
     }
   };
 
@@ -75,6 +72,7 @@ const CreateTrip = () => {
       id: docId,
     });
     navigate("/view-trip/" + docId);
+    setLoading(false);
   };
 
   return (

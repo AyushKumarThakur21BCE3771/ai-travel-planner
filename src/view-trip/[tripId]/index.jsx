@@ -6,6 +6,7 @@ import InfoSection from "../components/InfoSection";
 import Hotels from "../components/Hotels";
 import Itinerary from "../components/Itinerary";
 import Footer from "../../components/custom/Footer";
+import sandTimer from "../../../images/sandTimer.gif";
 
 function ViewTrip() {
   const { tripId } = useParams();
@@ -40,9 +41,9 @@ function ViewTrip() {
   };
 
   return (
-    <div className="mt-20">
+    <div>
       {loading ? (
-        <div>Loading...</div>
+        <img src={sandTimer} className="mt-80 m-auto" alt="" />
       ) : error ? (
         <div>{error}</div>
       ) : (
@@ -57,7 +58,6 @@ function ViewTrip() {
           <Itinerary trip={trip} />
         </div>
       )}
-      <Footer />
     </div>
   );
 }
