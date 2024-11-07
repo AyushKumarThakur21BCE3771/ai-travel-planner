@@ -25,15 +25,34 @@ function InfoSection({ trip }) {
     if (user) {
       const docId = Date.now().toString();
       await setDoc(doc(db, "feedback", docId), {
-        id:docId,
+        id: docId,
         feedback: feedback,
         userEmail: user?.email,
       });
       toast.success("Travel Preferences Saved Successfully !");
-
     }
     setFeedback("");
   };
+  const handleShare = () => {
+    if (navigator.share) {
+      const shareData = {
+        title: `Trip to ${trip?.userSelection?.location}`,
+        text: `🌍 Destination: ${trip?.userSelection?.location}\n\n📝${trip?.userSelection?.totalDays} ${
+          trip?.userSelection?.totalDays > 1 ? "Days" : "Day"
+        }\n💸 Budget: ${trip?.userSelection?.budget}\n👥 Travelers: ${
+          trip?.userSelection?.traveler
+        }`
+      };
+
+      navigator
+        .share(shareData)
+        .then(() => console.log("Trip details shared successfully!"))
+        .catch((error) => console.error("Error sharing trip details:", error));
+    } else {
+      alert("Sharing is not supported on this browser.");
+    }
+  };
+
   return (
     <div>
       <img
@@ -74,11 +93,12 @@ function InfoSection({ trip }) {
             )}
           </div>
         </div>
-        <Button className="scale-75">
+        <Button className="scale-75" onClick={handleShare}>
           <IoMdShare className="scale-150" />
         </Button>
-      </div>{
-        rateLoading?(<div className="bg-white border border-slate-200 grid grid-cols-6 gap-2 rounded-xl p-2 text-sm">
+      </div>
+      {rateLoading ? (
+        <div className="bg-white border border-slate-200 grid grid-cols-6 gap-2 rounded-xl p-2 text-sm">
           <h1 className="text-left text-[#f56551] text-xl font-bold col-span-6">
             Send Feedback
           </h1>
@@ -97,7 +117,10 @@ function InfoSection({ trip }) {
               <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm177.6 62.1C192.8 334.5 218.8 352 256 352s63.2-17.5 78.4-33.9c9-9.7 24.2-10.4 33.9-1.4s10.4 24.2 1.4 33.9c-22 23.8-60 49.4-113.6 49.4s-91.7-25.5-113.6-49.4c-9-9.7-8.4-24.9 1.4-33.9s24.9-8.4 33.9 1.4zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
             </svg>
           </button>
-          <button className="fill-slate-600 col-span-1 flex justify-center items-center rounded-lg p-2 duration-300 bg-slate-100 hover:border-[#f56551] focus:border-[#f56551] border border-slate-200" onClick={handleMood}>
+          <button
+            className="fill-slate-600 col-span-1 flex justify-center items-center rounded-lg p-2 duration-300 bg-slate-100 hover:border-[#f56551] focus:border-[#f56551] border border-slate-200"
+            onClick={handleMood}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="20px"
@@ -132,13 +155,76 @@ function InfoSection({ trip }) {
               ></path>
             </svg>
           </button>
-        </div>): (
-          <div></div>
-        )
-      }
-      
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
 
 export default InfoSection;
+
+// import React from 'react';
+
+// function ShareItineraryButton({ itinerary }) {
+//   const shareItinerary = () => {
+//     const { destination, departureDate, returnDate, activities, notes } = itinerary;
+
+//     // Format the itinerary message
+//     const itineraryMessage = `
+//       ✈ Trip Itinerary ✈
+//       Destination: ${destination}
+//       Departure Date: ${departureDate}
+//       Return Date: ${returnDate}
+
+//       Activities:
+//       ${activities.map((activity, index) => ${index + 1}. ${activity}).join('\n')}
+
+//       Notes:
+//       ${notes || 'No additional notes'}
+//     `;
+
+//     // Use Web Share API if available
+//     if (navigator.share) {
+//       navigator.share({
+//         title: "Trip Itinerary",
+//         text: itineraryMessage,
+//       })
+//       .then(() => console.log('Itinerary shared successfully'))
+//       .catch(error => console.error('Error sharing itinerary:', error));
+//     } else {
+//       alert("Sharing not supported on this browser.");
+//     }
+//   };
+
+//   return (
+//     <button onClick={shareItinerary} className="share-button">
+//       Share Itinerary
+//     </button>
+//   );
+// }
+
+// // Example itinerary data
+// const itinerary = {
+//   destination: "Paris, France",
+//   departureDate: "2024-12-20",
+//   returnDate: "2024-12-30",
+//   activities: [
+//     "Visit Eiffel Tower",
+//     "Explore the Louvre Museum",
+//     "Cruise on the Seine River"
+//   ],
+//   notes: "Remember to pack warm clothes!"
+// };
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <h1>My Trip</h1>
+//       <ShareItineraryButton itinerary={itinerary} />
+//     </div>
+//   );
+// }
+
+// export default App;

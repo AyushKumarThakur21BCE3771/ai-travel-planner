@@ -29,6 +29,7 @@ const Form = () => {
       !formData.confirmPassword
     ) {
       alert("Please fill all details !");
+      setLoading(false);
       return;
     }
     if (formData.password != formData.confirmPassword) {

@@ -23,6 +23,7 @@ const Form = () => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
       alert("Please fill all details !");
+      setLoading(false);
       return;
     }
     try {
