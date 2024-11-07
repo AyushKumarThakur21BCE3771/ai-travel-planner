@@ -16,7 +16,7 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <Toaster />
+      <Toaster position={"top-center"} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth/signup" element={<SignUp />} />

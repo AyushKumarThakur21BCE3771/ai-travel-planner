@@ -13,7 +13,7 @@ import Cookies from "js-cookie";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/constants/firebase.js";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/custom/Footer.jsx";
+import sandTimer from "../../images/sandTimer.gif";
 
 const CreateTrip = () => {
   const [place, setPlace] = useState("");
@@ -68,14 +68,12 @@ const CreateTrip = () => {
     setLoading(true);
     const user = JSON.parse(localStorage.getItem("user"));
     const docId = Date.now().toString();
-    console.log(docId);
     await setDoc(doc(db, "AiTrips", docId), {
       userSelection: formData,
       tripData: JSON.parse(TripData),
       userEmail: user?.email,
       id: docId,
     });
-    setLoading(false);
     navigate("/view-trip/" + docId);
   };
 
@@ -171,7 +169,6 @@ const CreateTrip = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
