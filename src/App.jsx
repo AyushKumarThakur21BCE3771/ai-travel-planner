@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CreateTrip from "./create-trip";
 import Home from "./Home";
 import Header from "./components/custom/Header";
-import SignIn from "./components/signIn";
+import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import AccountDetails from "./components/AccountDetails";
 import ViewTrip from "./view-trip/[tripId]/index";
