@@ -13,7 +13,7 @@ function ViewTrip() {
   const [trip, setTrip] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [showBookOption, setShowBookOption] = useState(false);
+  const [showBookOption, setShowBookOption] = useState(true);
 
   useEffect(() => {
     if (tripId) {
