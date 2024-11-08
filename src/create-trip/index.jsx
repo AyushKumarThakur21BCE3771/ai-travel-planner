@@ -71,7 +71,7 @@ const CreateTrip = () => {
       userEmail: user?.email,
       id: docId,
     });
-    navigate("/view-trip/" + docId);
+    navigate("/my-trips");
     setLoading(false);
   };
 
