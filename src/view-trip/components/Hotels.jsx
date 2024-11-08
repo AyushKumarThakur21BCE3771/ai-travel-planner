@@ -4,11 +4,12 @@ import placeholder from "../../../images/placeholder.jpg";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
 
-function Hotels({ trip, showBookOption, setShowBookOption }) {
+function Hotels({ trip, showBookOption, setShowBookOption, paymentStatus, setPaymentStatus }) {
   const { hotelOptions } = trip?.tripData || {};
   const handlePayment = () => {
     toast.success("payment done..");
     setShowBookOption(!showBookOption);
+    setPaymentStatus(!paymentStatus);
     window.open("https://razorpay.com/payment-link/plink_PIWmVNBnJ6ejV1/test", "_blank");
   };
   return (
