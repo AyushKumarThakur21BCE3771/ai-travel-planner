@@ -9,7 +9,7 @@ function Hotels({ trip, showBookOption, setShowBookOption }) {
   const handlePayment = () => {
     toast.success("payment done..");
     setShowBookOption(!showBookOption);
-    window.open("https://ayushkumarthakur-portfolio.vercel.app", "_blank");
+    window.open("https://razorpay.com/payment-link/plink_PIWmVNBnJ6ejV1/test", "_blank");
   };
   return (
     <div>
