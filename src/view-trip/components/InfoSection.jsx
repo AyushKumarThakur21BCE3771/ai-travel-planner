@@ -7,7 +7,7 @@ import { db } from "@/constants/firebase";
 import { toast } from "sonner";
 import infinityLoader from "../../../images/infinityLoader.gif";import { MdOutlineCancel } from "react-icons/md";
 
-function InfoSection({ trip, showBookOption }) {
+function InfoSection({ trip, showBookOption, paymentStatus }) {
   const [rateLoading, setRateLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [mood, setMood] = useState(true);
@@ -25,7 +25,7 @@ function InfoSection({ trip, showBookOption }) {
       return;
     }
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
+    if (user && paymentStatus) {
       const docId = Date.now().toString();
       await setDoc(doc(db, "feedback", docId), {
         id: docId,
@@ -34,6 +34,8 @@ function InfoSection({ trip, showBookOption }) {
       });
       toast.success("Travel Preferences Saved Successfully !");
       setRateLoading(!rateLoading);
+    }else{
+      toast.error("Only Paid Users can give Feedback...");
     }
     setFeedback("");
   };
