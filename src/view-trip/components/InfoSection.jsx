@@ -89,11 +89,12 @@ function InfoSection({ trip, showBookOption, paymentStatus }) {
                 ✨ Rate Trip
               </h2>
             ) : (
-              <div
-                className="p-1 px-3 w-20 text-white rounded-full bg-[#f56551] cursor-pointer"
+              <h2
+                className="p-1 px-3 text-white rounded-full bg-[#f56551] cursor-pointer"
                 onClick={openRatingSystem}
-              ><MdOutlineCancel className="scale-150 mt-1 m-auto"/>
-              </div>
+              >
+                ✨ Rate Trip
+              </h2>
             )}
           </div>
         </div>
