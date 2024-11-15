@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/constants/firebase";
 import { toast } from "sonner";
-import infinityLoader from "../../../images/infinityLoader.gif";import { MdOutlineCancel } from "react-icons/md";
+import infinityLoader from "../../../images/infinityLoader.gif";
+import { MdOutlineCancel } from "react-icons/md";
 
-function InfoSection({ trip, showBookOption, paymentStatus }) {
+function InfoSection({ userSelection, showBookOption, paymentStatus }) {
   const [rateLoading, setRateLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [mood, setMood] = useState(true);
@@ -34,7 +35,7 @@ function InfoSection({ trip, showBookOption, paymentStatus }) {
       });
       toast.success("Travel Preferences Saved Successfully !");
       setRateLoading(!rateLoading);
-    }else{
+    } else {
       toast.error("Only Paid Users can give Feedback...");
     }
     setFeedback("");
@@ -67,19 +68,19 @@ function InfoSection({ trip, showBookOption, paymentStatus }) {
       <div className="flex justify-between items-center">
         <div className="my-5 flex flex-col gap-2">
           <h2 className="font-bold text-xl sm:text-2xl capitalize">
-            {trip?.userSelection?.location}
+            {userSelection?.location}
           </h2>
           <div className="flex flex-col gap-1 sm:flex-row">
             <h2 className="p-1 px-3 bg-gray-200 rounded-full text-gray-700">
-              📅 {trip?.userSelection?.totalDays}
-              {trip?.userSelection?.totalDays > 1 ? " Days" : " Day"}
+              📅 {userSelection?.totalDays}
+              {userSelection?.totalDays > 1 ? " Days" : " Day"}
             </h2>
 
             <h2 className="p-1 px-3 bg-gray-200 rounded-full text-gray-700">
-              💸 {trip?.userSelection?.budget} Budget
+              💸 {userSelection?.budget} Budget
             </h2>
             <h2 className="p-1 px-3 bg-gray-200 rounded-full text-gray-700">
-              🧑‍🤝‍🧑 No. of Travellers: {trip?.userSelection?.traveler}
+              🧑‍🤝‍🧑 No. of Travellers: {userSelection?.traveler}
             </h2>
             {!rateLoading && !showBookOption ? (
               <h2

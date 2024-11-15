@@ -4,8 +4,7 @@ import placeholder from "../../../images/placeholder.jpg";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
 
-function Hotels({ trip, showBookOption, setShowBookOption, paymentStatus, setPaymentStatus }) {
-  const { hotelOptions } = trip?.tripData || {};
+function Hotels({ hotelOptions, showBookOption, setShowBookOption, paymentStatus, setPaymentStatus }) {
   const handlePayment = () => {
     toast.success("payment done..");
     setShowBookOption(!showBookOption);

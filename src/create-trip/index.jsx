@@ -54,9 +54,8 @@ const CreateTrip = () => {
         .replace("{traveler}", formData?.traveler);
 
       const result = await chatSession.sendMessage(FINAL_PROMPT);
-     setUserLoggedIn(true);
-      navigate("/my-trips");
-      
+      setUserLoggedIn(true);
+      await saveTrip(result.response.text());
     } else {
       window.location.href = "/auth/signin";
     }
@@ -72,8 +71,8 @@ const CreateTrip = () => {
       userEmail: user?.email,
       id: docId,
     });
-    ;
     setLoading(false);
+    navigate(`/view-trip/${docId}`);
   };
 
   return (

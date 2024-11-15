@@ -10,7 +10,10 @@ import sandTimer from "../../../images/sandTimer.gif";
 
 function ViewTrip() {
   const { tripId } = useParams();
-  const [trip, setTrip] = useState(null);
+  const[trip, setTrip] = useState(null);
+  const [userSelection, setUserSelection] = useState(null);
+  const [hotelOptions, setHotelOptions] = useState(null);
+  const [itineraryOptions, setItineraryOptions] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showBookOption, setShowBookOption] = useState(true);
@@ -31,11 +34,14 @@ function ViewTrip() {
 
       if (docSnap.exists()) {
         setTrip(docSnap.data());
+        setUserSelection(docSnap.data().userSelection);
+        setHotelOptions(JSON.parse(docSnap.data().tripData).hotelOptions);
+        setItineraryOptions(JSON.parse(docSnap.data().tripData).itinerary);
       } else {
         console.log("No such document!");
       }
     } catch (err) {
-      console.error("Error fetching trip data:", err);
+      // console.error("Error fetching trip data:", err);
       setError("Failed to load trip data.");
     } finally {
       setLoading(false);
@@ -51,13 +57,13 @@ function ViewTrip() {
       ) : (
         <div className="p-4 md:px-20 lg:px-44 xl:px-56">
           {/* Information Section */}
-          <InfoSection trip={trip} showBookOption={showBookOption} paymentStatus={paymentStatus} />
+          <InfoSection userSelection={userSelection} showBookOption={showBookOption} paymentStatus={paymentStatus} />
 
           {/* Recommended Hotels */}
-          <Hotels trip={trip} showBookOption={showBookOption} setShowBookOption={setShowBookOption} paymentStatus={paymentStatus} setPaymentStatus={setPaymentStatus}/>
+          <Hotels hotelOptions={hotelOptions} showBookOption={showBookOption} setShowBookOption={setShowBookOption} paymentStatus={paymentStatus} setPaymentStatus={setPaymentStatus}/>
 
           {/* Itinerary Plans */}
-          <Itinerary trip={trip} />
+          <Itinerary itineraryOptions={itineraryOptions} />
         </div>
       )}
     </div>
